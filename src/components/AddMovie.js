@@ -4,14 +4,16 @@ import './AddMovie.css';
 function AddMovie({ onAddMovie }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [fullDescription, setFullDescription] = useState('');
   const [posterURL, setPosterURL] = useState('');
+  const [trailerLink, setTrailerLink] = useState('');
   const [rating, setRating] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validate inputs
-    if (!title || !description || !posterURL || !rating) {
+    if (!title || !description || !fullDescription || !posterURL || !trailerLink || !rating) {
       alert('Please fill in all fields');
       return;
     }
@@ -22,9 +24,12 @@ function AddMovie({ onAddMovie }) {
     }
 
     const newMovie = {
+      id: Date.now(),
       title,
       description,
+      fullDescription,
       posterURL,
+      trailerLink,
       rating: parseFloat(rating),
     };
 
@@ -33,7 +38,9 @@ function AddMovie({ onAddMovie }) {
     // Reset form
     setTitle('');
     setDescription('');
+    setFullDescription('');
     setPosterURL('');
+    setTrailerLink('');
     setRating('');
   };
 
@@ -54,12 +61,23 @@ function AddMovie({ onAddMovie }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Short Description:</label>
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter movie description"
+            placeholder="Enter short movie description (for card)"
+            className="form-textarea"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="fullDescription">Full Description:</label>
+          <textarea
+            id="fullDescription"
+            value={fullDescription}
+            onChange={(e) => setFullDescription(e.target.value)}
+            placeholder="Enter detailed movie description (for details page)"
             className="form-textarea"
           />
         </div>
@@ -72,6 +90,18 @@ function AddMovie({ onAddMovie }) {
             value={posterURL}
             onChange={(e) => setPosterURL(e.target.value)}
             placeholder="Enter poster image URL"
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="trailerLink">Trailer Embed URL:</label>
+          <input
+            id="trailerLink"
+            type="text"
+            value={trailerLink}
+            onChange={(e) => setTrailerLink(e.target.value)}
+            placeholder="Enter YouTube embed URL (e.g., https://www.youtube.com/embed/...)"
             className="form-input"
           />
         </div>

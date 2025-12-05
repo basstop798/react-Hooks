@@ -1,3 +1,8 @@
+.movie-card-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .movie-card {
   background: linear-gradient(135deg, #ff9900, #ff6b00);
   border-radius: 12px;
